@@ -46,5 +46,19 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.24'
     kapt 'com.google.dagger:dagger-android-processor:2.24'
 
+    // Material.io v1.0.0
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //Groupie
+    implementation 'com.xwray:groupie:2.8.0'
+    implementation 'com.xwray:groupie-databinding:2.8.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.8.0'
+
+    // Network
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+
 
 }
