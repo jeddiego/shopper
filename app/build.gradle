@@ -46,5 +46,7 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.24'
     kapt 'com.google.dagger:dagger-android-processor:2.24'
 
+    //ViewModel & LiveData v1.1.1
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
 }
