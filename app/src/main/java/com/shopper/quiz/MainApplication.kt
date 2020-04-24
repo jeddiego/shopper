@@ -5,6 +5,9 @@ import android.content.Context
 import com.shopper.quiz.di.components.DaggerUtilComponent
 import com.shopper.quiz.di.components.UtilComponent
 import com.shopper.quiz.di.modules.ContextModule
+import com.shopper.quiz.providers.AppExecutors
+import com.shopper.quiz.providers.AppFeaturesProvider
+import com.shopper.quiz.providers.ResourceProvider
 
 class MainApplication : Application() {
     override fun onCreate() {
@@ -17,18 +20,16 @@ class MainApplication : Application() {
     companion object {
         lateinit var utilComponent: UtilComponent
 
-        /*	public static AppExecutors getAppExecutors() {
-		return utilComponent.getAppExecutors();
-	}
-
-	public static ResourceProvider getResourceProvider() {
-		return utilComponent.getResourceProvider();
-	}
-
-	public static AppFeaturesProvider getAppFeaturesProvider() {
-		return utilComponent.getAppFeaturesProvider();
-	}*/
         val appContext: Context
             get() = utilComponent.appContext
+
+        val appResourceProvider: ResourceProvider
+            get() = utilComponent.resourceProvider
+
+        val appFeaturesProvider: AppFeaturesProvider
+            get() = utilComponent.appFeaturesProvider
+
+        val appExecutors: AppExecutors
+            get() = utilComponent.appExecutors
     }
 }

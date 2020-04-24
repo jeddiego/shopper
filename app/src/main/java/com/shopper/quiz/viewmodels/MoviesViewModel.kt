@@ -1,42 +1,27 @@
 package com.shopper.quiz.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.shopper.quiz.di.components.DaggerRepositoryComponent
+import com.shopper.quiz.domain.MoviesRepository
 import com.shopper.quiz.models.Movies
+import javax.inject.Inject
 
 class MoviesViewModel : ViewModel() {
-    val movies = MutableLiveData<List<Movies>>()
+    @Inject
+    lateinit var repository: MoviesRepository
 
-    //TODO retrieve data from back
+    private var _movies = MutableLiveData<List<Movies>>()
+    fun getMovies(): LiveData<List<Movies>> = _movies
+
     init {
-        movies.value = listOf(
-            Movies(
-                1,
-                "Movie 1",
-                "The best of the movie 1",
-                "/stmYfCUGd8Iy6kAMBr6AmWqx8Bq.jpg",
-                "y",
-                7.0,
-                15
-            ),
-            Movies(
-                2,
-                "Movie 2",
-                "The best of the movie 2",
-                "/gzlbb3yeVISpQ3REd3Ga1scWGTU.jpg",
-                "y",
-                6.0,
-                16
-            ),
-            Movies(
-                3,
-                "Movie 3",
-                "The best of the movie 3",
-                "/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg",
-                "y",
-                9.0,
-                17
-            )
-        )
+        DaggerRepositoryComponent.builder()
+            .build().inject(this)
+        downloadMovies()
+    }
+
+    private fun downloadMovies() {
+        _movies = repository.getMovies()
     }
 }

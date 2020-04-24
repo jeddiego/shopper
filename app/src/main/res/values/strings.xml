@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Quiz</string>
+    <string name="retrofit_error_unproccess">La petición no se pudo procesar\n(%s)</string>
+    <string name="retrofit_error_timeout">Tiempo de espera excedido</string>
+    <string name="retrofit_error_server">Error al conectarse al servidor\n(%s)</string>
+    <string name="no_internet">No tienes acceso a internet</string>
+    <string name="retrofit_error_body">Error al leer respuesta del servidor</string>
+
 </resources>

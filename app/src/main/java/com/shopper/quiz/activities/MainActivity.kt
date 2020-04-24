@@ -19,7 +19,6 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.item_list.view.item_list
 import javax.inject.Inject
 
-
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModel: MoviesViewModel
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bindViewModel() {
-        viewModel.movies.observe(this, Observer(this::setMovies))
+        viewModel.getMovies().observe(this, Observer(this::setMovies))
     }
 
     private fun setMovies(listMovies: List<Movies>) {

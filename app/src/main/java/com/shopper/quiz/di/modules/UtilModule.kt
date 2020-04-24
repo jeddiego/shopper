@@ -1,25 +1,30 @@
 package com.shopper.quiz.di.modules
 
-import com.shopper.quiz.di.modules.ContextModule
+import android.content.Context
+import com.shopper.quiz.providers.AppExecutors
+import com.shopper.quiz.providers.AppFeaturesProvider
+import com.shopper.quiz.providers.ResourceProvider
 import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
 @Module(includes = [ContextModule::class])
 class UtilModule {
-/*	@Provides
-	@Singleton
-	public AppExecutors provideAppExecutors() {
-		return new AppExecutors();
-	}
+    @Provides
+    @Singleton
+    fun provideAppExecutors(): AppExecutors {
+        return AppExecutors()
+    }
 
-	@Provides
-	@Singleton
-	public ResourceProvider providerResourceProvider(Context context) {
-		return new ResourceProvider(context);
-	}
+    @Provides
+    @Singleton
+    fun providerResourceProvider(context: Context): ResourceProvider {
+        return ResourceProvider(context)
+    }
 
-	@Provides
-	@Singleton
-	public AppFeaturesProvider provideAppFeaturesProvider(Context context) {
-		return new AppFeaturesProvider(context);
-	}*/
+    @Provides
+    @Singleton
+    fun provideAppFeaturesProvider(context: Context): AppFeaturesProvider {
+        return AppFeaturesProvider(context)
+    }
 }

@@ -15,9 +15,9 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 const val EXTRA_ID_MOVIE = "id_movie"
 
 class ImageAndRatingsDialogFragment : BaseBottomSheet() {
-    lateinit var binding: DialogMovieRatingBinding
-    lateinit var posterPath: String
-    var idMovie: Int = 0
+    private lateinit var binding: DialogMovieRatingBinding
+    private lateinit var posterPath: String
+    private var idMovie: Int = 0
     private var rating = 0.0
     private val baseUrl = "https://image.tmdb.org/t/p/w440_and_h660_face"
 

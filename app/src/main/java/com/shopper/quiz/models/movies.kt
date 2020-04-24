@@ -2,7 +2,6 @@ package com.shopper.quiz.models
 
 import com.google.gson.annotations.SerializedName
 
-//TODO Use classes
 data class MoviesResponse (
     @SerializedName("page")
     val page: Int,
