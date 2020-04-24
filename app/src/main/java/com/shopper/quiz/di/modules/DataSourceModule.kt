@@ -1,5 +1,7 @@
 package com.shopper.quiz.di.modules
 
+import com.shopper.quiz.datasource.db.AppDatabase
+import com.shopper.quiz.datasource.db.MoviesDiskDS
 import com.shopper.quiz.datasource.web.MoviesWebDS
 import dagger.Module
 import dagger.Provides
@@ -10,7 +12,14 @@ class DataSourceModule {
 
     @Singleton
     @Provides
-    fun provideBucketsWebDS(): MoviesWebDS {
+    fun provideMoviesWebDS(): MoviesWebDS {
         return MoviesWebDS()
     }
+
+    @Singleton
+    @Provides
+    fun provideMoviesDiskDS(database: AppDatabase): MoviesDiskDS {
+        return database.moviesDiskDS
+    }
+
 }

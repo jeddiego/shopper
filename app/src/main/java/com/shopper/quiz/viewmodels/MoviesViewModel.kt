@@ -11,8 +11,7 @@ import javax.inject.Inject
 class MoviesViewModel : ViewModel() {
     @Inject
     lateinit var repository: MoviesRepository
-
-    private var _movies = MutableLiveData<List<Movies>>()
+    private lateinit var _movies: LiveData<List<Movies>>
     fun getMovies(): LiveData<List<Movies>> = _movies
 
     init {

@@ -8,5 +8,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [DataSourceModule::class])
 interface DataSourceComponent {
-    fun inject(bucketsRepository: MoviesRepository)
+
+    fun inject(moviesRepository: MoviesRepository)
+
 }

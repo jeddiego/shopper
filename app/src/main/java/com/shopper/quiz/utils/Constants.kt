@@ -1,4 +1,4 @@
-package com.shopper.quiz.rest.constants
+package com.shopper.quiz.utils
 
 class Constants {
     object Web {
@@ -8,5 +8,9 @@ class Constants {
         const val WRITE_TIMEOUT = 15
         const val READ_TIMEOUT = 15
         const val API_KEY = "01f692bc96fc1453fded7262a7a34bd5"
+    }
+
+    object Db {
+        const val DB_NAME = "movies_db"
     }
 }

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import com.shopper.quiz.MainApplication
 import com.shopper.quiz.R
-import com.shopper.quiz.rest.constants.Constants
+import com.shopper.quiz.utils.Constants
 import com.shopper.quiz.rest.models.OnMoviesResponse
 import com.shopper.quiz.rest.models.OnResponse
 import retrofit2.Call

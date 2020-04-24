@@ -1,6 +1,6 @@
 package com.shopper.quiz.di.modules
 
-import com.shopper.quiz.rest.constants.Constants
+import com.shopper.quiz.utils.Constants
 import com.shopper.quiz.rest.services.WebService
 import dagger.Module
 import dagger.Provides
@@ -23,7 +23,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpBuilder(logging: HttpLoggingInterceptor?): OkHttpClient {
+    fun provideHttpBuilder(logging: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder.addInterceptor(logging)
         builder.connectTimeout(
@@ -43,7 +43,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(httpClient: OkHttpClient?): Retrofit {
+    fun provideRetrofit(httpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.Web.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
