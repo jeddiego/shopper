@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shopper.quiz.R
 import com.shopper.quiz.databinding.ActivityMainBinding
@@ -59,8 +60,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         binding.frameLayout.item_list.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context)
             adapter = adapterMoviesList
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+
         }
     }
 
