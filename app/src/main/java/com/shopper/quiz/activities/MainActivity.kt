@@ -27,11 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val adapterMoviesList = GroupAdapter<GroupieViewHolder>().apply {
         setOnItemClickListener { item, _ ->
             if (item is MoviesItemView) {
-                val sheet = ImageAndRatingsDialogFragment.newInstance(
-                    item.movies.posterPath,
-                    item.movies.id,
-                    item.movies.voteAverage
-                )
+                val sheet = ImageAndRatingsDialogFragment.newInstance(item.movies)
                 sheet.show(supportFragmentManager, sheet.simpleClassName())
             }
         }
@@ -63,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = adapterMoviesList
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-
         }
     }
 

@@ -1,10 +1,12 @@
 package com.shopper.quiz.models
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class MoviesResponse(
     @SerializedName("page")
@@ -17,6 +19,7 @@ data class MoviesResponse(
     val movies: Movies
 )
 
+@Parcelize
 @Entity(tableName = "movies")
 data class Movies(
     @NonNull
@@ -26,7 +29,7 @@ data class Movies(
     val id: Int,
     @SerializedName("title")
     @ColumnInfo(name = "title")
-    val titile: String,
+    val title: String,
     @SerializedName("overview")
     @ColumnInfo(name = "overview")
     val overview: String,
@@ -42,4 +45,4 @@ data class Movies(
     @SerializedName("vote_count")
     @ColumnInfo(name = "vote_count")
     val voteCount: Int
-)
+): Parcelable

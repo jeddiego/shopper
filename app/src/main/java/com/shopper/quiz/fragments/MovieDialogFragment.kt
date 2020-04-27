@@ -7,19 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.shopper.quiz.activities.MovieDetailActivity
 import com.shopper.quiz.databinding.DialogMovieRatingBinding
+import com.shopper.quiz.models.Movies
+import com.shopper.quiz.utils.Constants.Web.IMAGE_URL
 import com.shopper.quiz.views.BaseBottomSheet
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
-const val EXTRA_ID_MOVIE = "id_movie"
-
 class ImageAndRatingsDialogFragment : BaseBottomSheet() {
     private lateinit var binding: DialogMovieRatingBinding
-    private lateinit var posterPath: String
-    private var idMovie: Int = 0
-    private var rating = 0.0
-    private val baseUrl = "https://image.tmdb.org/t/p/w440_and_h660_face"
+    private lateinit var movie: Movies
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +24,10 @@ class ImageAndRatingsDialogFragment : BaseBottomSheet() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DialogMovieRatingBinding.inflate(layoutInflater)
-        arguments?.let {
-            posterPath = it.getString(POSTER_PATH).orEmpty()
-            idMovie = it.getInt(ID_MOVIE)
-            rating = it.getDouble(RATING)
+        arguments?.getParcelable<Movies>(MOVIE).let {
+            if (it != null) {
+                movie = it
+            }
         }
         return binding.root
     }
@@ -38,38 +35,36 @@ class ImageAndRatingsDialogFragment : BaseBottomSheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Picasso.with(context)
-            .load(baseUrl + posterPath)
+            .load(IMAGE_URL + movie.posterPath)
             .transform(RoundedCornersTransformation(15, 1))
             .into(binding.imageViewPoster)
         Picasso.with(context)
-            .load(baseUrl + posterPath)
+            .load(IMAGE_URL + movie.posterPath)
             .fit()
             .transform(BlurTransformation(context, 100, 1))
             .into(binding.imageViewBackground)
-        binding.textViewRating.text = rating.toString()
+        binding.textViewRating.text = movie.voteAverage.toString()
         binding.layoutContainer.setOnClickListener {
             val intent = Intent(context, MovieDetailActivity::class.java).apply {
-                putExtra(EXTRA_ID_MOVIE, idMovie)
+                putExtra(MovieDetailActivity.ID, movie.id)
+                putExtra(MovieDetailActivity.TITLE, movie.title)
+                putExtra(MovieDetailActivity.DESCRIPTION, movie.overview)
+                putExtra(MovieDetailActivity.POSTER_PATH, movie.posterPath)
+                putExtra(MovieDetailActivity.RATING, movie.voteAverage)
             }
             startActivity(intent)
         }
     }
 
     companion object {
-        private const val POSTER_PATH = "poster_path"
-        private const val RATING = "rating"
-        private const val ID_MOVIE = "id_movie"
+        private const val MOVIE = "movie_json"
 
         @JvmStatic
         fun newInstance(
-            posterPath: String,
-            idMovie: Int,
-            rating: Double
+            movie: Movies
         ): ImageAndRatingsDialogFragment {
             val args = Bundle().apply {
-                putString(POSTER_PATH, posterPath)
-                putInt(ID_MOVIE, idMovie)
-                putDouble(RATING, rating)
+                putParcelable(MOVIE, movie)
             }
 
             return ImageAndRatingsDialogFragment().apply {

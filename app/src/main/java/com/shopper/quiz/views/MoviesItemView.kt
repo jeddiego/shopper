@@ -11,7 +11,7 @@ class MoviesItemView(
     override fun getLayout(): Int = R.layout.item_movie
 
     override fun bind(viewBinding: ItemMovieBinding, position: Int) {
-        viewBinding.textViewTitle.text = movies.titile
+        viewBinding.textViewTitle.text = movies.title
     }
 
 }
