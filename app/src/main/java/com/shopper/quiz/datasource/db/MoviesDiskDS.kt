@@ -15,6 +15,6 @@ interface MoviesDiskDS {
     @Query("DELETE FROM movies")
     fun truncate()
 
-    @Query("SELECT * FROM movies")
-    fun readAll(): LiveData<List<Movies>>
+    @Query("SELECT * FROM movies WHERE title LIKE :name")
+    fun readMovies(name: String): LiveData<List<Movies>>
 }

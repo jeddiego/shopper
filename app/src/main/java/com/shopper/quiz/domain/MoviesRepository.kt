@@ -1,5 +1,6 @@
 package com.shopper.quiz.domain
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -28,12 +29,12 @@ class MoviesRepository {
             .contextModule(ContextModule(MainApplication.appContext)).build().inject(this)
     }
 
-    fun getMovies(): LiveData<List<Movies>> {
-        return if (MainApplication.appFeaturesProvider.hasInternetConnection()) {
+    fun getMovies(name: String): LiveData<List<Movies>> {
+        return if (MainApplication.appFeaturesProvider.hasInternetConnection() && name.isEmpty()) {
             cleanData()
             getFromNetwork()
         } else {
-            diskDS.readAll()
+            diskDS.readMovies(name)
         }
     }
 

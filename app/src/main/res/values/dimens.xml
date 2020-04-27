@@ -12,4 +12,5 @@
     <dimen name="detail_movie_imageView_margin">36dp</dimen>
     <dimen name="detail_movie_rating">28sp</dimen>
     <dimen name="dialog_movie_rating">48sp</dimen>
+    <dimen name="appbar_elevation">4dp</dimen>
 </resources>
