@@ -44,14 +44,11 @@ class MoviesRepository {
         webDS.download(API_KEY, page, Observer {
             //FIXME observers
             if (it !is OnMoviesResponse) {
-                val rawRespone: String = (it as OnResponse).message
-//                observer.onChanged(rawRespone)
                 return@Observer
             }
 
-//            observer.onChanged(true)
             diskDS.insertAll(it.movies)
-            movies.postValue(it.movies)
+            movies.postValue(it.movies.sorted())
         })
 
         return movies

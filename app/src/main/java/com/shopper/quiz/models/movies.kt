@@ -21,7 +21,7 @@ data class MoviesResponse(
 
 @Parcelize
 @Entity(tableName = "movies")
-data class Movies(
+data class Movies (
     @NonNull
     @PrimaryKey()
     @SerializedName("id")
@@ -45,4 +45,6 @@ data class Movies(
     @SerializedName("vote_count")
     @ColumnInfo(name = "vote_count")
     val voteCount: Int
-): Parcelable
+): Parcelable, Comparable<Movies> {
+    override fun compareTo(other: Movies): Int = this.title.compareTo(other.title)
+}

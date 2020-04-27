@@ -7,5 +7,6 @@
     <string name="retrofit_error_body">Error al leer respuesta del servidor</string>
     <string name="synopsis">Sinopsis</string>
     <string name="search_title">Buscar</string>
+    <string name="popular_movies">Películas populares</string>
 
 </resources>

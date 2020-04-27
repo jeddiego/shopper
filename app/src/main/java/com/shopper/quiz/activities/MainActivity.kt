@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                viewModel.searchMovieByName(newText)
+                if(newText.length > 2) { viewModel.searchMovieByName(newText) }
+                else if(newText.length == 1) { viewModel.searchMovieByName("") }
                 return false
             }
         })

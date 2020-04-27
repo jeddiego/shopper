@@ -26,5 +26,5 @@ class MoviesViewModel : ViewModel() {
         query.value = ""
     }
 
-    fun searchMovieByName(name: String) = apply { query.value = "$name%" }
+    fun searchMovieByName(name: String) = apply { query.value = "%$name%" }
 }
