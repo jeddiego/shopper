@@ -12,13 +12,15 @@ import javax.inject.Inject
 class MoviesViewModel : ViewModel() {
     @Inject
     lateinit var repository: MoviesRepository
-
     private val query = MutableLiveData<String>()
+    private var onlyLocal = false
+    private var findMovieOnline = false
     val movies: LiveData<List<Movies>> = Transformations.switchMap(
         query,
         ::temp
     )
-    private fun temp(name: String) = repository.getMovies(name)
+
+    private fun temp(name: String) = repository.getMovies(name, onlyLocal, findMovieOnline)
 
     init {
         DaggerRepositoryComponent.builder()
@@ -26,5 +28,9 @@ class MoviesViewModel : ViewModel() {
         query.value = ""
     }
 
-    fun searchMovieByName(name: String) = apply { query.value = "%$name%" }
+    fun searchMovieByName(name: String, onlyLocal: Boolean, findMovieOnline: Boolean) = apply {
+        this.onlyLocal = onlyLocal
+        query.value = name
+        this.findMovieOnline = findMovieOnline
+    }
 }

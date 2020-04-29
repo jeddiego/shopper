@@ -22,4 +22,12 @@ class MoviesWebDS {
         webService.getMovies(apiKey, page).enqueue(ApiCallback(observer))
     }
 
+    fun search(
+        apiKey: String,
+        query: String,
+        observer: Observer<Any>
+    ) {
+        webService.getSearch(apiKey, query).enqueue(ApiCallback(observer))
+    }
+
 }

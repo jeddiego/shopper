@@ -15,6 +15,6 @@ interface MoviesDiskDS {
     @Query("DELETE FROM movies")
     fun truncate()
 
-    @Query("SELECT * FROM movies WHERE title LIKE :name ORDER BY title")
+    @Query("SELECT * FROM movies WHERE title like :name ORDER BY title")
     fun readMovies(name: String): LiveData<List<Movies>>
 }

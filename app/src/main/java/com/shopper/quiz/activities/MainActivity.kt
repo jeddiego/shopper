@@ -16,6 +16,7 @@ import com.shopper.quiz.di.components.DaggerViewModelComponent
 import com.shopper.quiz.di.modules.ContextModule
 import com.shopper.quiz.fragments.ImageAndRatingsDialogFragment
 import com.shopper.quiz.models.Movies
+import com.shopper.quiz.models.localSearch
 import com.shopper.quiz.utils.simpleClassName
 import com.shopper.quiz.viewmodels.MoviesViewModel
 import com.shopper.quiz.views.MoviesItemView
@@ -24,7 +25,6 @@ import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 import kotlinx.android.synthetic.main.item_list.view.*
 import javax.inject.Inject
-
 
 class MainActivity : AppCompatActivity() {
     @Inject
@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    var length = 0
+    var oldLength = 0
+    private var localSearch = localSearch(query = "", isLocal = false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,16 +65,30 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                localSearch(query)
                 return false
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                if(newText.length > 2) { viewModel.searchMovieByName(newText) }
-                else if(newText.length == 1) { viewModel.searchMovieByName("") }
+            override fun onQueryTextChange(query: String): Boolean {
+                oldLength = length
+                length = query.length
+
+                if (oldLength > length) {
+                    localSearch(query)
+                }
                 return false
             }
         })
         return true
+    }
+
+    private fun localSearch(query: String) {
+        localSearch = localSearch(query = query, isLocal = true)
+        if (query.length > 2) {
+            viewModel.searchMovieByName(query, onlyLocal = true, findMovieOnline = false)
+        } else {
+            viewModel.searchMovieByName("", onlyLocal = true, findMovieOnline = false)
+        }
     }
 
     private fun bindViewModel() {
@@ -80,10 +97,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun setMovies(listMovies: List<Movies>) {
         adapterMoviesList.apply {
-            if(listMovies.isNotEmpty()){ clear() }
+            clear()
             listMovies.forEach {
                 add(MoviesItemView(it))
             }
+        }
+        if (listMovies.isEmpty() && localSearch.isLocal) {
+            viewModel.searchMovieByName(
+                localSearch.query,
+                onlyLocal = false,
+                findMovieOnline = true
+            )
+            localSearch = localSearch(query = "", isLocal = false)
         }
     }
 
