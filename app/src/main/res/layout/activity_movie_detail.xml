@@ -56,69 +56,75 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/imageView_detail_movie_margin"
-                    android:layout_marginEnd="@dimen/imageView_detail_movie_margin"
-                    android:layout_marginBottom="@dimen/imageView_detail_movie_margin">
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/textView_title"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{ movie.title }"
-                        android:textSize="@dimen/detail_movie_title"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Pelicula" />
+                        android:layout_marginEnd="@dimen/imageView_detail_movie_margin"
+                        android:paddingTop="@dimen/imageView_detail_movie_margin"
+                        android:paddingBottom="@dimen/imageView_detail_movie_margin">
 
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/text_margin"
-                        android:text="@{ movie.overview }"
-                        android:textSize="@dimen/detail_movie_description"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textView_title"
-                        tools:text="Pelicula" />
+                        <TextView
+                            android:id="@+id/textView_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@{ movie.title }"
+                            android:textSize="@dimen/detail_movie_title"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Pelicula" />
 
-                    <ImageView
-                        android:id="@+id/imageView_rating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/detail_movie_imageView_margin"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/description"
-                        app:srcCompat="@drawable/ic_stars_black_56dp" />
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/text_margin"
+                            android:text="@{ movie.overview }"
+                            android:textSize="@dimen/detail_movie_description"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_title"
+                            tools:text="Pelicula" />
 
-                    <TextView
-                        android:id="@+id/textView_rating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/layout_margin"
-                        android:alpha="0.76"
-                        android:text="@{ String.valueOf(movie.voteAverage) }"
-                        android:textSize="@dimen/detail_movie_rating"
-                        app:layout_constraintBottom_toBottomOf="@id/imageView_rating"
-                        app:layout_constraintStart_toEndOf="@id/imageView_rating"
-                        app:layout_constraintTop_toTopOf="@id/imageView_rating"
-                        tools:text="9.0" />
+                        <ImageView
+                            android:id="@+id/imageView_rating"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/detail_movie_imageView_margin"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/description"
+                            app:srcCompat="@drawable/ic_stars_black_56dp" />
 
-                    <CheckBox
-                        android:id="@+id/checkBox_sinopsis"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/text_margin"
-                        android:checked="true"
-                        android:text="@string/synopsis"
-                        android:textSize="@dimen/detail_movie_description"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        <TextView
+                            android:id="@+id/textView_rating"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/layout_margin"
+                            android:alpha="0.76"
+                            android:text="@{ String.valueOf(movie.voteAverage) }"
+                            android:textSize="@dimen/detail_movie_rating"
+                            app:layout_constraintBottom_toBottomOf="@id/imageView_rating"
+                            app:layout_constraintStart_toEndOf="@id/imageView_rating"
+                            app:layout_constraintTop_toTopOf="@id/imageView_rating"
+                            tools:text="9.0" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <CheckBox
+                            android:id="@+id/checkBox_sinopsis"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/text_margin"
+                            android:checked="true"
+                            android:text="@string/synopsis"
+                            android:textSize="@dimen/detail_movie_description"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView_rating" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </ScrollView>
 
             </LinearLayout>
 

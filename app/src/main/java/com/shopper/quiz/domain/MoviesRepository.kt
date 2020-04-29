@@ -94,7 +94,7 @@ class MoviesRepository {
 
     private fun setupDiskDs(movies: List<Movies>, findMovieOnline: Boolean) {
         MainApplication.appExecutors.diskIO().execute {
-            if (findMovieOnline) {
+            if (!findMovieOnline) {
                 diskDS.truncate()
             }
             diskDS.insertAll(movies)
