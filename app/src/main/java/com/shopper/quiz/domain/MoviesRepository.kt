@@ -36,12 +36,12 @@ class MoviesRepository {
     ): LiveData<List<Movies>> {
         when {
             findMovieOnline -> {
-                return if (MainApplication.appFeaturesProvider.hasInternetConnection()) {
+                return if (!MainApplication.appFeaturesProvider.hasInternetConnection()) {
+                    showMessage(R.string.no_internet)
+                    diskDS.readMovies("%$name%")
+                } else {
                     showMessage(R.string.searching_online)
                     getFromNetwork(name, findMovieOnline)
-                } else {
-                    showMessage(R.string.no_internet)
-                    diskDS.readMovies(name)
                 }
             }
             onlyLocalSearch -> {
@@ -88,12 +88,13 @@ class MoviesRepository {
                 movies.postValue(it.movies.sorted())
             })
         }
+
         return movies
     }
 
     private fun setupDiskDs(movies: List<Movies>, findMovieOnline: Boolean) {
         MainApplication.appExecutors.diskIO().execute {
-            if (!findMovieOnline) {
+            if (findMovieOnline) {
                 diskDS.truncate()
             }
             diskDS.insertAll(movies)

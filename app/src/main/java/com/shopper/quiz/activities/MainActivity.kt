@@ -16,7 +16,6 @@ import com.shopper.quiz.di.components.DaggerViewModelComponent
 import com.shopper.quiz.di.modules.ContextModule
 import com.shopper.quiz.fragments.ImageAndRatingsDialogFragment
 import com.shopper.quiz.models.Movies
-import com.shopper.quiz.models.localSearch
 import com.shopper.quiz.utils.simpleClassName
 import com.shopper.quiz.viewmodels.MoviesViewModel
 import com.shopper.quiz.views.MoviesItemView
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity() {
     }
     var length = 0
     var oldLength = 0
-    private var localSearch = localSearch(query = "", isLocal = false)
+    var flagLocalSearch = false
+    var queryFlagLocalSearch = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,12 +83,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun localSearch(query: String) {
-        localSearch = localSearch(query = query, isLocal = true)
         if (query.length > 2) {
             viewModel.searchMovieByName(query, onlyLocal = true, findMovieOnline = false)
         } else {
             viewModel.searchMovieByName("", onlyLocal = true, findMovieOnline = false)
         }
+        flagLocalSearch = true
+        queryFlagLocalSearch = query
     }
 
     private fun bindViewModel() {
@@ -102,13 +103,14 @@ class MainActivity : AppCompatActivity() {
                 add(MoviesItemView(it))
             }
         }
-        if (listMovies.isEmpty() && localSearch.isLocal) {
+        if (listMovies.isNullOrEmpty() && flagLocalSearch) {
             viewModel.searchMovieByName(
-                localSearch.query,
+                queryFlagLocalSearch,
                 onlyLocal = false,
                 findMovieOnline = true
             )
-            localSearch = localSearch(query = "", isLocal = false)
+            flagLocalSearch = false
+            queryFlagLocalSearch = ""
         }
     }
 

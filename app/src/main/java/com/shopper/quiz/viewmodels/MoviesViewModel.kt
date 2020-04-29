@@ -30,7 +30,7 @@ class MoviesViewModel : ViewModel() {
 
     fun searchMovieByName(name: String, onlyLocal: Boolean, findMovieOnline: Boolean) = apply {
         this.onlyLocal = onlyLocal
-        query.value = name
         this.findMovieOnline = findMovieOnline
+        query.value = name
     }
 }
